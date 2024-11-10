@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ImageDown,PaintBucket,Palette,Eraser } from 'lucide-react';
+import { ImageDown,PaintBucket,Palette,Menu } from 'lucide-react';
 import { SketchPicker } from 'react-color';
 
 const CanvasDrawing = () => {
@@ -12,6 +12,7 @@ const CanvasDrawing = () => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showColorPickerBackground, setShowColorPickerBackground] = useState(false);
   const [lineWidth, setLineWidth] = useState(5);
+  const[menuOpen, setMenuOpen] = useState(false);
  
  // Inside your CanvasDrawing component
 
@@ -44,7 +45,9 @@ const changeStrokeColor = (color) => {
   }
 };
 
-
+const handleMenuClick = () => {
+  setMenuOpen(!menuOpen);
+};
 const changeBackgroundColor = (color) => {
   setBackgroundColor(color.hex);
   setBackgroundColor(color.hex);
@@ -116,6 +119,11 @@ const PaintBucketstyle = {
   width: 60,
   color: 'black',
 }
+const menuStyle = {
+  height: 60,
+  width: 60,
+  color: 'black',
+}
   return (
     <div className='canvas'>
       <canvas
@@ -125,7 +133,9 @@ const PaintBucketstyle = {
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
       />
-      <div className='tools'>
+      <Menu className='menu' style={menuStyle}
+      onClick={handleMenuClick} />
+      <div className={`tools ${menuOpen ? 'show' : ''}`}>
         <PaintBucket 
         style={PaintBucketstyle} 
         onClick={() => setShowColorPickerBackground(!showColorPickerBackground)}
@@ -161,7 +171,7 @@ const PaintBucketstyle = {
           />
           <label>Line Width: {lineWidth}</label>
       </div>
-     
+      
     </div>
   );
 };

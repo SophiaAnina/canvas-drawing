@@ -34,6 +34,9 @@ canvas:hover{
   width: fit-content;
   background-color: transparent;
 }
+.menu{
+  display: none;
+}
 .tools{
   display: flex;
   position: absolute;
@@ -72,4 +75,23 @@ img{
   border: 4px solid black;
   border-radius: 20px;
   margin: 20px;
+}
+@media screen and (max-width: 600px) {
+  .tools{
+   display: none;
+  }
+  .tools.show{
+    display: grid;
+    top: 210px;
+  }
+  .menu{
+    display: block;
+    position: absolute;
+    margin: 20px;
+    cursor: pointer;
+  }
+
+  canvas{
+    width: calc(innerWidth * 1.0);
+  }
 }
